@@ -169,7 +169,10 @@ if __name__ == '__main__':
 
 
     #Chromeを起動
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
 
     # 関数実行
     login()

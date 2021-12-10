@@ -164,7 +164,8 @@ if __name__ == '__main__':
     max_limit_error_cnt = 10
     #いいね！ボタン取得用
     #like_x_path = '//main//section//button'
-    like_x_path = '//*[@id="react-root"]/section/main/div/div/article/div/div/div/div/section/span/button/div/span/*[name()="svg"]'
+    like_x_path = '//*[@id="react-root"]/div/div/section/main/div/div/article/div/div/div/div/section/span/button/div/span/*[name()="svg"]'
+    
 
 
     #Chromeを起動

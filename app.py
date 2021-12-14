@@ -153,7 +153,7 @@ if __name__ == '__main__':
     ## User_Setting
     #Instagramログイン用 ID PASS
     username = "kanacoriander_styles"
-    password = "coriander8340"
+    password = "style1234"
     file_words = "words_1.txt"
     #word_x.txt の x を指定して、キーワードを変更可能
 
@@ -172,8 +172,18 @@ if __name__ == '__main__':
     options = Options()
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
+
+    #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認できます）
+    # 1. 自分のpcで行う場合
+    PROFILE_PATH = "/Users/hamadakanako/Library/Application Support/Google/Chrome/Default"
+
+    # 2. aws ec2上にインストールしたchromeで行う場合
+    # PROFILE_PATH = "~/.config/google-chrome"
+
+    options.add_argument("--user-data-dir=" + PROFILE_PATH)
+
     driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
 
     # 関数実行
-    login()
+    # login()
     app()

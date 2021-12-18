@@ -11,7 +11,7 @@ def readWords(file_words):
     file_check = os.path.isfile(file_words)
     if file_check:#ファイルが存在した
         print("######################################################################")
-        print(file_words + "を読み込みました。以下ワードのハッシュタグ付き投稿をいいねします。")
+        print(file_words + "を読み込みました")
         words = []
         with open(file_words,'r') as f:
             for row in f:

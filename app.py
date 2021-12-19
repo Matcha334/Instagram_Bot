@@ -4,6 +4,7 @@
 # 必要なライブラリのインポート
 from math import trunc
 from selenium import webdriver
+from selenium.webdriver.common import by
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -14,6 +15,21 @@ import sys
 import traceback
 import readfile
 import random
+import requests
+import json
+
+# def get_profile_info():
+    # API_Key = ""
+    # headers = {'Content-Type': 'application/json', 'key':API_Key}
+    # data = {'client_id':'xxxxxxxxxxxxxxxxxx',
+    # 'client_secret':'xxxxxxxxxxxxxxxxxx',
+    # 'grant_type':'authorization_code', 
+    # 'redirect_uri':'http://localhost:14080/newpage', 
+    # 'code':code}        
+
+    # token_url = 'https://api.instagram.com/oauth/access_token'
+    # result = requests.get(token_url, params = data)
+    # print("api result:", result)
 
 def login():
     #Instagram ログインURL
@@ -41,6 +57,22 @@ def login():
         print("ブロックされました。パスワードを変更する必要があります。")
         print("処理を終了します。")
         exit()
+
+def follow():
+    follow_button_path = '//*[@id="react-root"]/section/main/div/div/article/div/div/div/div/div/header/div/div/div/button'
+    follow_button = driver.find_element(By.XPATH, follow_button_path)
+    profile_path = '//*[@id="react-root"]/section/main/div/div/article/div/div/div/div/div/header/div/div/div/span/a'
+    profile_button = driver.find_elements(By.CLASS_NAME, profile_path)
+    follow_state = follow_button.text
+    print("follow_button: ", follow_button)
+    print("follow_state: ", follow_state)
+    if follow_state == "フォローする":
+        profile_button.click()
+        time.sleep(5)
+        #apiを使用して、フォロー数/フォロワー数の比率が1を超えていたら
+        follow_button.click()
+
+    time.sleep(3)
 
 
 def auto_like():
@@ -78,7 +110,7 @@ def auto_like():
             break
         print("http req get hashtag page: " + tag_search_url.format(word))
         driver.get(tag_search_url.format(word))
-        time.sleep(3)#3秒待つ
+        time.sleep(6)#6秒待つ
         driver.implicitly_wait(15)
 
         #リンクのhref属性の値を取得
@@ -109,6 +141,8 @@ def auto_like():
                     favbtn.click()
                     likes_cnt += 1
                     print('いいね！ {}'.format(likes_cnt))
+                    time.sleep(3)
+                    follow()
                 else: # '「いいね！」を取り消す'の場合
                     print('  既に「いいね」済みです。')    
                 time.sleep(2)
@@ -147,15 +181,11 @@ def auto_like():
     driver.close()
 
 if __name__ == '__main__':
-
-    # コマンドの引数
-    #args = sys.argv
-    ## User_Setting
+    ## Login_Setting
     #Instagramログイン用 ID PASS
     username = "kanacoriander_styles"
     password = "style1234"
     file_words = "words_1.txt"
-    #word_x.txt の x を指定して、キーワードを変更可能
 
     ## Common_Setting
     #１日にいいね！できる最大値。この数を超えたら処理終了
@@ -163,22 +193,18 @@ if __name__ == '__main__':
     #自動いいね！時、エラーがこの数を超えたら処理終了
     max_limit_error_cnt = 2
     #いいね！ボタン取得用
-    #like_x_path = '//main//section//button'
     like_x_path = '//*[@id="react-root"]/section/main/div/div/article/div/div/div/div/section/span/button/div/span/*[name()="svg"]'
-    
-
 
     #Chromeを起動
     options = Options()
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     options.add_argument("--no-sandbox")
 
-    #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認できます）
+    #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）
     # 1. 自分のpcで行う場合
     PROFILE_PATH = "/Users/hamadakanako/Library/Application Support/Google/Chrome/Default"
-
     # 2. aws ec2上にインストールしたchromeで行う場合
-    # PROFILE_PATH = "~/.config/google-chrome"
+    #PROFILE_PATH = "~/.config/google-chrome"
 
     options.add_argument("--user-data-dir=" + PROFILE_PATH)
 

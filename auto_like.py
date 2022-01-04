@@ -100,7 +100,7 @@ def auto_like(driver, file_words):
                     off = True
                     break
 
-                flc = open(file_l_cnt,'w')
+                flc = open(file_l_cnt,'w', encoding="utf-8")
                 flc.write(data_other_than_today + today + '\t'  + str(likes_cnt) + '\n')
                 flc.close()
 

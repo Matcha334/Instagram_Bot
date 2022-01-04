@@ -30,7 +30,7 @@ def repost(driver):
   ##################################
   #https://dixq.net/forum/viewtopic.php?t=16930
   img = urllib.urlopen(page_url_for_repost)
-  localfile = open( os.path.basename(page_url_for_repost), 'wb')
+  localfile = open( os.path.basename(page_url_for_repost), 'wb', encoding="utf-8")
   localfile.write(img.read())
   img.close()
   localfile.close()

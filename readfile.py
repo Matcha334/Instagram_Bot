@@ -13,7 +13,7 @@ def readWords(file_words):
         print("######################################################################")
         print(file_words + "を読み込みました")
         words = []
-        with open(file_words,'r') as f:
+        with open(file_words,'r', encoding="utf-8") as f:
             for row in f:
                 if row != "":
                     word = row.strip()
@@ -36,7 +36,7 @@ def getLikesCntToday(today,file_l_cnt):
     file_check = os.path.isfile(file_l_cnt)
     if file_check:#ファイルが存在した
 
-        with open(file_l_cnt,'r') as f:
+        with open(file_l_cnt,'r',encoding="utf-8") as f:
             for row in f:
                 if row != "":
                     date,num = row.split('\t')
@@ -49,13 +49,13 @@ def getLikesCntToday(today,file_l_cnt):
         f.close()
         #ファイル内に本日の日付が見つからなかった場合
         if likes_cnt == "":
-            f = open(file_l_cnt,'a')
+            f = open(file_l_cnt,'a', encoding="utf-8")
             f.write(today + '\t0\n')
             likes_cnt = 0
             f.close()
 
     else:#ファイルが存在しなかった
-        f = open(file_l_cnt,'w')
+        f = open(file_l_cnt,'w', encoding="utf-8")
         f.write(today + '\t0\n')
         likes_cnt = 0
         f.close()
@@ -68,7 +68,7 @@ def getLikesCntToday(today,file_l_cnt):
 def readAlreadyLikesURL(file_alu):
 
     already_likes_url = []
-    f = open(file_alu,'r')
+    f = open(file_alu,'r', encoding="utf-8")
     for row in f:
         if row.strip() == "":
             continue

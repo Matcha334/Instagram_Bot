@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     #Chromeを起動
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     options.add_argument("--no-sandbox")
 
     #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）
@@ -53,6 +53,6 @@ if __name__ == '__main__':
     # 関数実行
     login(driver,username="insta_bot_practice", password="AuYpZ9nYzv7x59Z")
     auto_like(driver, file_words="words_1.txt")
-    repost(driver)
+    # repost(driver)
     #ブラウザを閉じる
     driver.close()

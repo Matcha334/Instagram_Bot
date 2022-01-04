@@ -8,6 +8,7 @@ selenium = "*"
 requests = "*"
 pyperclip = "*"
 pyautogui = "*"
+pillow = "*"
 
 [dev-packages]
 

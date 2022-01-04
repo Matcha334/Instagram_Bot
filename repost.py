@@ -15,12 +15,12 @@ import requests
 import json
 import pyperclip
 import sys, urllib
-import os.path
+import os
 import pyautogui
 
 def repost(driver):
   #[done]repostしたい投稿のリンクを取得しブラウザで開く（クリップボードまたはファイルから）
-  page_url_for_repost = 'https://www.instagram.com/p/CYRJF_4hIiK/'#pyperclip.paste()
+  page_url_for_repost = 'https://www.instagram.com/p/CYRJF_4hIiK/'
   print(page_url_for_repost)
   driver.get(page_url_for_repost)
 
@@ -46,33 +46,32 @@ def repost(driver):
   #[done]『コンピュータから選択』ボタンをクリック
   select_button = driver.find_element(By.XPATH, '/html/body/div[8]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]/div/button')
   select_button.click()
-
   time.sleep(3)
 
   #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
-  
-  os.system("/bin/sh upload_image.sh")
-  print("ファイルをアップロードしました")
+  os.system("/bin/sh ./upload_image.sh")
   time.sleep(3)
+  driver.implicitly_wait(10)
+  print("ファイルをアップロードしました")
   
-  #[done]『次へ』をクリック
+  #『次へ』をクリック
   next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
   next_button1.click()
   time.sleep(5)
-  print("次へのボタンを1回目押しました")
+  print("1回目の次へボタンを押しました")
   next_button2 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
   next_button2.click()
   time.sleep(5)
-  print("次へのボタンを2回目押しました")
+  print("2回目の次へボタンを押しました")
 
-  #[done]キャプションを作成(元の投稿者をメンションし、ハッシュタグをつける)
+  #キャプションを作成(元の投稿者をメンションし、ハッシュタグをつける)
   caption = "photo by @{}\n\n-----------\n#tokyo#photographer#japan#写真好きな人と繋がりたい".format(credit)
   caption_path = '/html/body/div[6]/div[2]/div/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/textarea'
   captionField = driver.find_element(By.XPATH, caption_path)
   captionField.send_keys(caption)
   time.sleep(5)
 
-  #[done]投稿ボタンをクリック
+  #投稿ボタンをクリック
   share_button = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
   share_button.click()
   time.sleep(10)

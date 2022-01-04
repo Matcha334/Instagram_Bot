@@ -68,6 +68,7 @@ def repost(driver):
 
   #投稿ボタンをクリック
   
+
   share_button = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
   share_button.click()
   time.sleep(10)

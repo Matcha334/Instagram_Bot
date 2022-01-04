@@ -38,19 +38,21 @@ if __name__ == '__main__':
 
     #Chromeを起動
     options = Options()
-    # options.add_argument('--headless')
     options.add_argument("--no-sandbox")
 
     #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）
     # 1. 自分のpcで行う場合
     PROFILE_PATH = "/Users/[YourComputerName]/Library/Application Support/Google/Chrome/Default"
     # 2. aws ec2上にインストールしたchromeで行う場合
+    # options.add_argument('--headless')
     # PROFILE_PATH = "~/.config/google-chrome"
+
     options.add_argument("--user-data-dir=" + PROFILE_PATH)
 
     driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
     driver.maximize_window()
     # 関数実行
+    #login関数はログインしていない時のみ実行。
     # login(driver,username="kanacoriander", password="style1234")
     # auto_like(driver, file_words="words_1.txt")
     repost(driver)

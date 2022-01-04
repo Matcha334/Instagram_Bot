@@ -47,14 +47,13 @@ def repost(driver):
   select_button = driver.find_element(By.XPATH, '/html/body/div[8]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]/div/button')
   select_button.click()
 
-  #time.sleep(10)
+  time.sleep(3)
 
   #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
   
-  x,y = pyautogui.locateCenterOnScreen("/Users/hamadakanako/Desktop/instagram_hashtag2auto_likes_tool-master/download.jpg")
-  print(x, ": ", y)
-  pyautogui.click(x, y)
+  os.system("/bin/sh upload_image.sh")
   print("ファイルをアップロードしました")
+  time.sleep(3)
   
   #[done]『次へ』をクリック
   next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')

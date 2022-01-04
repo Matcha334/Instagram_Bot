@@ -14,7 +14,7 @@ import datetime
 import sys
 import traceback
 import random
-# import requests
+import requests
 import json
 
 from auto_like import auto_like
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     PROFILE_PATH = "~/.config/google-chrome"
     options.add_argument("--user-data-dir=" + PROFILE_PATH)
 
-    driver = webdriver.Chrome(options=options, executable_path="/Applications/chromedriver")
+    driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
     driver.maximize_window()
     # 関数実行
     login(driver,username="insta_bot_practice", password="AuYpZ9nYzv7x59Z")

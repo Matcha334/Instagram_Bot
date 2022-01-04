@@ -16,21 +16,25 @@ import json
 import pyperclip
 import sys, urllib
 import os.path
-# import pyautogui
+import pyautogui
 
 def repost(driver):
   #[done]repostしたい投稿のリンクを取得しブラウザで開く（クリップボードまたはファイルから）
-  page_url_for_repost = 'https://www.instagram.com/p/CXTTJWipJQG/'#pyperclip.paste()
+  page_url_for_repost = 'https://www.instagram.com/p/CYRJF_4hIiK/'#pyperclip.paste()
   print(page_url_for_repost)
   driver.get(page_url_for_repost)
 
-  #開いたリンクから画像をdesktopのinsta_repostフォルダに保存
+  #[done]開いたリンクから画像をdesktopのinsta_repostフォルダに保存
+  src_attribute = driver.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/div[1]/article/div/div[1]/div/div/div[1]/img').get_attribute("srcset").split()
+  print("attribute_src:", src_attribute[0])
   
+  f = open('download.jpg','wb')
+  f.write(requests.get(src_attribute[0]).content)
+  f.close()
 
-  #投稿のアカウント名を読み取る
+  #[done]投稿のアカウント名を読み取る
   credit_path = '//*[@id="react-root"]/section/main/div/div[1]/article/div/div[2]/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a'
-  # credit = driver.find_element(By.XPATH, credit_path).text
-  credit = "kanacoriander.photo"
+  credit = driver.find_element(By.XPATH, credit_path).text
   print("クレジット: ", credit)
 
   #[done]投稿アイコンをクリック
@@ -42,14 +46,19 @@ def repost(driver):
   #[done]『コンピュータから選択』ボタンをクリック
   select_button = driver.find_element(By.XPATH, '/html/body/div[8]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]/div/button')
   select_button.click()
-  time.sleep(20)
+
+  #time.sleep(10)
 
   #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
-
-
-  #『次へ』をクリック
-  next_button = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
-  next_button.click()
+  
+  x,y = pyautogui.locateCenterOnScreen("/Users/hamadakanako/Desktop/instagram_hashtag2auto_likes_tool-master/download.jpg")
+  print(x, ": ", y)
+  pyautogui.click(x, y)
+  print("ファイルをアップロードしました")
+  
+  #[done]『次へ』をクリック
+  next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
+  next_button1.click()
   time.sleep(5)
   print("次へのボタンを1回目押しました")
   next_button2 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
@@ -59,16 +68,12 @@ def repost(driver):
 
   #[done]キャプションを作成(元の投稿者をメンションし、ハッシュタグをつける)
   caption = "photo by @{}\n\n-----------\n#tokyo#photographer#japan#写真好きな人と繋がりたい".format(credit)
-
   caption_path = '/html/body/div[6]/div[2]/div/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/textarea'
   captionField = driver.find_element(By.XPATH, caption_path)
   captionField.send_keys(caption)
   time.sleep(5)
 
-
-  #投稿ボタンをクリック
-  
-
+  #[done]投稿ボタンをクリック
   share_button = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
   share_button.click()
   time.sleep(10)

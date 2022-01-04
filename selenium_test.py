@@ -14,7 +14,7 @@ PROFILE_PATH = "~/.config/google-chrome"
 
 options.add_argument("--user-data-dir=" + PROFILE_PATH)
 
-driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
+driver = webdriver.Chrome(options=options, executable_path="/Applications/chromedriver")
 driver.maximize_window()
 driver.get('https://www.instagram.com/')
 

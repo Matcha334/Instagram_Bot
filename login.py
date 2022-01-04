@@ -12,7 +12,7 @@ import sys
 import traceback
 import auto_like
 import random
-import requests
+# import requests
 import json
 
 def login(driver, username, password):

@@ -11,7 +11,7 @@ import datetime
 import sys
 import traceback
 import random
-import requests
+# import requests
 import json
 import pyperclip
 import sys, urllib

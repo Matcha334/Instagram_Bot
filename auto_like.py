@@ -11,7 +11,7 @@ import sys
 import traceback
 import readfile
 import random
-import requests
+# import requests
 import json
 
 

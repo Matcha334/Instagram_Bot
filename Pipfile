@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 selenium = "*"
 requests = "*"
+pyperclip = "*"
+pyautogui = "*"
 
 [dev-packages]
 

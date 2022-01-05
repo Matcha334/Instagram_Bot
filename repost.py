@@ -39,8 +39,41 @@ def repost(driver):
     time.sleep(3)
 
     #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
-    # (mac)
-    os.system("/bin/sh ./upload_image.sh")
+    #mac
+    # os.system("/bin/sh ./upload_image.sh")
+    # 開くダイアログを探して接続する
+    findWindow = lambda: pywinauto.findwindows.find_windows(title=u'開く')[0]
+    dialog = pywinauto.timings.wait_until_passes(5, 1, findWindow)
+
+    pwa_app = pywinauto.Application()
+    pwa_app.connect(handle=dialog)
+
+    window = pwa_app[u"開く"]
+
+    # テキストボックス(ファイル名)にPATHを入力
+    tb = window[u"ファイル名(&N):"]
+    if tb.is_enabled():
+        tb.click()
+        edit = window.Edit4
+        edit.set_focus()
+        edit.set_text(r"C:\Users\yamag\OneDrive\デスクトップ\MyProgramming\instagram_bot\origianl_instagram_bot\download.jpg")
+
+    # 開くボタンを押す（Alt+O）
+    pywinauto.keyboard.send_keys("%O")
+            
+    time.sleep(3)
+    driver.implicitly_wait(10)
+    print("ファイルをアップロードしました")
+    
+    #『次へ』をクリック
+    next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
+    next_button1.click()
+    time.sleep(5)
+    print("1回目の次へボタンを押しました")
+    next_button2 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
+    next_button2.click()
+    time.sleep(5)
+    print("2回目の次へボタンを押しました")
 
     time.sleep(3)
     driver.implicitly_wait(10)

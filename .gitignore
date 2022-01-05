@@ -1,6 +1,7 @@
 __pycache__/
 
 driver/chromedriver
+driver/chromedriver.exe
 
 *.png
 *.pyc

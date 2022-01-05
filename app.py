@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # (mac)
     PROFILE_PATH = "/Users/YourComputerName/Library/Application Support/Google/Chrome/Default"
     # (windows)
-    # PROFILE_PATH = "C:\Users\Alice\AppData\Local\Google\Chrome\User Data\Default"
+    # PROFILE_PATH = r"C:\Users\YOURCOMPURENAME\AppData\Local\Google\Chrome\User Data\Default"
 
     # (linux)
     # PROFILE_PATH = "~/.config/google-chrome"
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     driver.maximize_window()
 
     ## 実行したい関数のコメントアウトを解除してください
-    # auto_like(driver)
-    # repost(driver)
+    # auto_like(driver, "words_1.txt", follow_bool=True)
+    repost(driver)
     # follow(driver)
 
     ## chromeを閉じる

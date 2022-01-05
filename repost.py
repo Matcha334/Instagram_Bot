@@ -5,14 +5,12 @@ from selenium.webdriver.common.by import By
 import time
 import traceback
 import requests
-import pyperclip
-import sys, urllib
 import os
-import subprocess
+import pywinauto
 
 def repost(driver):
     #repostしたい投稿のリンクを取得しブラウザで開く（クリップボードまたはファイルから）
-    page_url_for_repost = 'https://www.instagram.com/p/CYRJF_4hIiK/'
+    page_url_for_repost = 'https://www.instagram.com/p/CX0ah7ZhFQ1/'
     print(page_url_for_repost)
     driver.get(page_url_for_repost)
 
@@ -43,9 +41,6 @@ def repost(driver):
     #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
     # (mac)
     os.system("/bin/sh ./upload_image.sh")
-
-    # (windows, linux)
-    # subprocess.run(['/bin/sh', './upload_image.sh'])
 
     time.sleep(3)
     driver.implicitly_wait(10)

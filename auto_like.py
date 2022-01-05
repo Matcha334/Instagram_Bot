@@ -1,21 +1,15 @@
-from math import trunc
-from selenium import webdriver
-from selenium.webdriver.common import by
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-import urllib.parse
 import time
 import datetime
 import sys
 import traceback
 import readfile
 import random
-import requests
-import json
+
+from follow import follow
 
 
-def auto_like(driver, file_words):
+def auto_like(driver, file_words, follow_bool):
   
     #１日にいいね！できる最大値。この数を超えたら処理終了
     max_limit_likes_counter = 500
@@ -90,7 +84,8 @@ def auto_like(driver, file_words):
                     likes_cnt += 1
                     print('いいね！ {}'.format(likes_cnt))
                     time.sleep(5)
-                    #follow()
+                    if follow_bool:
+                        follow(driver)
                 else: # '「いいね！」を取り消す'の場合
                     print('  既に「いいね」済みです。')    
                 time.sleep(2)

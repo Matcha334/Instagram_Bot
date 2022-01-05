@@ -14,8 +14,8 @@ import time
 from login import login
  
 INSTAGRAM_DOMAIN = "https://www.instagram.com"
-MIN_COUNT = 200
-KEYWORD = "雷門"
+MIN_COUNT = 100
+KEYWORD = "都庁"
 CHROMEDRIVER = "/Users/bishop/Desktop/origianl_instagram_bot/chromedriver"
 PROFILE_PATH = "/Users/bishop/Library/Application Support/Google/Chrome/Default"
 
@@ -23,16 +23,16 @@ PROFILE_PATH = "/Users/bishop/Library/Application Support/Google/Chrome/Default"
 def get_driver():
     #　ヘッドレスモードでブラウザを起動
     options = Options()
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
     # ブラウザーを起動
-    # options.add_argument("--user-data-dir=" + PROFILE_PATH)
+    options.add_argument("--user-data-dir=" + PROFILE_PATH)
     driver = webdriver.Chrome(CHROMEDRIVER, options=options)
       
     return driver
  
 # 対象ページ取得
 def get_text_from_target_page(driver, first_flg, url):
-      
+    
     # ターゲット
     driver.get(url)
     try:
@@ -41,9 +41,9 @@ def get_text_from_target_page(driver, first_flg, url):
         WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.TAG_NAME, 'header')))
     except Exception as error:
         print(f"error: {error}")
+        driver.implicitly_wait(30)  # 見つからないときは、15秒まで待つ
         driver.refresh()
         print("refreshed")
-        # driver.implicitly_wait(30)  # 見つからないときは、15秒まで待つ
       
     text = driver.page_source
     return text
@@ -106,6 +106,7 @@ def get_detail_form_info(driver, text):
         username = user_elems.find('a')['href']
         profile_url = "https://www.instagram.com" + username
         text_2 = get_text_from_target_page(driver, 'header', profile_url)
+        time.sleep(2)
         profile_html = bs4.BeautifulSoup(text_2, features='lxml')
         follower_elems = profile_html.find_all(class_="Y8-fY")[1]
         detail['followers'] = follower_elems.find('a').find('span').contents[0]
@@ -172,7 +173,7 @@ if __name__ == '__main__':
  
     # ブラウザーを起動
     driver = get_driver()
-    login(driver,username="okumataro02", password="qwertywinc")
+    # login(driver,username="okumataro03", password="qwertywinc")
 
     #検索結果ページのhtmlソース取得
     text_0 = get_text_from_target_page(driver, True, url)
@@ -211,6 +212,7 @@ if __name__ == '__main__':
         url = info.get('post_url')
 
         text_1 = get_text_from_target_page(driver, 'article', url)
+        time.sleep(2)
         detail = get_detail_form_info(driver, text_1)
         if detail != None:
             info.update(detail)

@@ -15,10 +15,12 @@ from login import login
 if __name__ == '__main__':
     ## 自分の環境を入力してください ##
     #####################################
-    webdriver_path = ""
-    your_env = "" # mac or windows or linux
-    your_computer_name = ""
+    webdriver_path = "/usr/local/bin/chromedriver"
+    your_env = "mac" # mac, windows, linux
+    your_computer_name = "hamadakanako"
     logged_in = True #ログインしているか否か
+    username = ""
+    password = ""
     #######################################
 
 
@@ -44,7 +46,7 @@ if __name__ == '__main__':
     driver.maximize_window()
 
     if not logged_in:
-        login(driver, "YourUsername", "YourPassword")
+        login(driver, username, password)
 
     ## 実行したい関数のコメントアウトを解除してください
     auto_like(driver, follow_bool=True) #True or Falseを入力

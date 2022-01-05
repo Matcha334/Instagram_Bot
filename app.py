@@ -4,57 +4,45 @@
 # 必要なライブラリのインポート
 from math import trunc
 from selenium import webdriver
-from selenium.webdriver.common import by
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import urllib.parse
-import time
-import datetime
-import sys
 import traceback
-import random
-import requests
-import json
 
+# 作成した関数のインポート
 from auto_like import auto_like
-from login import login
 from repost import repost
 
-# def get_profile_info():
-    # API_Key = ""
-    # headers = {'Content-Type': 'application/json', 'key':API_Key}
-    # data = {'client_id':'xxxxxxxxxxxxxxxxxx',
-    # 'client_secret':'xxxxxxxxxxxxxxxxxx',
-    # 'grant_type':'authorization_code', 
-    # 'redirect_uri':'http://localhost:14080/newpage', 
-    # 'code':code}        
-
-    # token_url = 'https://api.instagram.com/oauth/access_token'
-    # result = requests.get(token_url, params = data)
-    # print("api result:", result)
-
 if __name__ == '__main__':
+    ## このファイルはlogin.pyを1度実行している時のみ実行してください
+    ## 1. 現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）をオプションに設定。
+    ## login.pyを実行したのにログインされていない場合は、Defaultを削除して行ってみてください
+    ## 自分の環境に合ったものだけコメントアウトを解除してください
 
-    #Chromeを起動
+    # (mac)
+    PROFILE_PATH = "/Users/YourComputerName/Library/Application Support/Google/Chrome/Default"
+    # (windows)
+    # PROFILE_PATH = "C:\Users\Alice\AppData\Local\Google\Chrome\User Data\Default"
+
+    # (linux)
+    # PROFILE_PATH = "~/.config/google-chrome"
+    
+    ## バックグラウンドで実行したい場合は以下の1行のコメントアウトを解除
+    # options.add_argument('--headless')
+
+    ## chromeの実行のオプションを追加
     options = Options()
+    options.add_argument("--user-data-dir=" + PROFILE_PATH)
     options.add_argument("--no-sandbox")
 
-    #現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）
-    # 1. 自分のpcで行う場合
-    PROFILE_PATH = "/Users/[YourComputerName]/Library/Application Support/Google/Chrome/Default"
-    # 2. aws ec2上にインストールしたchromeで行う場合
-    # options.add_argument('--headless')
-    # PROFILE_PATH = "~/.config/google-chrome"
-
-    options.add_argument("--user-data-dir=" + PROFILE_PATH)
-
+    ## chromeを立ち上げる
     driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
+    
+    ## 画面の大きさを最大化する
     driver.maximize_window()
-    # 関数実行
-    #login関数はログインしていない時のみ実行。
-    # login(driver,username="kanacoriander", password="style1234")
-    # auto_like(driver, file_words="words_1.txt")
-    repost(driver)
-    #ブラウザを閉じる
+
+    ## 実行したい関数のコメントアウトを解除してください
+    # auto_like(driver)
+    # repost(driver)
+    # follow(driver)
+
+    ## chromeを閉じる
     driver.close()

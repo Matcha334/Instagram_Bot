@@ -10,6 +10,7 @@ pyperclip = "*"
 pyautogui = "*"
 pillow = "*"
 pandas = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

@@ -1,0 +1,21 @@
+caption,follower,following,good,comment,date,url,label
+ここは適当なストリング, 1000, 200, 400, 12, 2021-01-04T06:40:33.000Z, www.sample.com, 1
+random string, 500, 300, 100, 4, 2020-01-04T06:40:33.000Z, www.hallo.com, 0
+random string #hallo #lol, 500, 300, 100, 4, 2021-10-04T06:40:33.000Z, www.hallo.com, 0
+random string #hallo #what #where, 500, 300, 100, 4, 2021-03-23T06:40:33.000Z, www.hallo.com, 1
+random string # # # # #, 500, 300, 100, 4, 2021-02-04T06:40:33.000Z, www.hallo.com, 1
+random string, 500, 300, 100, 4, 2021-04-22T06:40:33.000Z, www.hallo.com, 0
+random string # , 500, 300, 100, 4, 2021-05-14T06:40:33.000Z, www.hallo.com, 0
+random string, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+random string # # # # # # @ @, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string # # @ @ @ @ @, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+random string # , 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+random string, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+random string # # # # # # @ @ @ @ @ @, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string # # # # # # # # # # #, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string # # # # # , 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string # # # # # # # # #, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 1
+random string, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+random string, 500, 300, 100, 4, 2022-01-04T06:40:33.000Z, www.hallo.com, 0
+

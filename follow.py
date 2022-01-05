@@ -16,10 +16,12 @@ def follow(driver):
         time.sleep(3)
 
         follower = driver.find_elements(By.CLASS_NAME,'g47SY')[1].get_attribute("title")
+        follower= int (follower.repalace(',',''))
         if follower == 0:
             follower = follower + 1
 
-        follow = driver.find_elements(By.CLASS_NAME,'g47SY')[2].get_attribute("title")
+        follow = driver.find_elements(By.CLASS_NAME,'g47SY')[2].text
+        follow= int (follow.repalace(',',''))
         print("follower num : ", follower, "follow num: ", follow)
         if (follow/follower) >= 1:
             profile_follow_button = driver.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')

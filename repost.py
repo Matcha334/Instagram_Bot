@@ -13,14 +13,14 @@ import traceback
 import random
 import requests
 import json
-import pyperclip
 import sys, urllib
 import os
-import pyautogui
+import pywinauto
+
 
 def repost(driver):
   #[done]repostしたい投稿のリンクを取得しブラウザで開く（クリップボードまたはファイルから）
-  page_url_for_repost = 'https://www.instagram.com/p/CYRJF_4hIiK/'
+  page_url_for_repost = "https://www.instagram.com/p/CX0ah7ZhFQ1/"
   print(page_url_for_repost)
   driver.get(page_url_for_repost)
 
@@ -49,7 +49,28 @@ def repost(driver):
   time.sleep(3)
 
   #コンピュータのデスクトップのinsta_repostフォルダの最新の写真を選択
-  os.system("/bin/sh ./upload_image.sh")
+  #mac
+  # os.system("/bin/sh ./upload_image.sh")
+  # 開くダイアログを探して接続する
+  findWindow = lambda: pywinauto.findwindows.find_windows(title=u'開く')[0]
+  dialog = pywinauto.timings.wait_until_passes(5, 1, findWindow)
+
+  pwa_app = pywinauto.Application()
+  pwa_app.connect(handle=dialog)
+
+  window = pwa_app[u"開く"]
+
+  # テキストボックス(ファイル名)にPATHを入力
+  tb = window[u"ファイル名(&N):"]
+  if tb.is_enabled():
+      tb.click()
+      edit = window.Edit4
+      edit.set_focus()
+      edit.set_text(r"C:\Users\yamag\OneDrive\デスクトップ\MyProgramming\instagram_bot\origianl_instagram_bot\download.jpg")
+
+  # 開くボタンを押す（Alt+O）
+  pywinauto.keyboard.send_keys("%O")
+        
   time.sleep(3)
   driver.implicitly_wait(10)
   print("ファイルをアップロードしました")

@@ -9,7 +9,7 @@ import random
 from follow import follow
 
 
-def auto_like(driver, file_words, follow_bool):
+def auto_like(driver, follow_bool):
   
     #１日にいいね！できる最大値。この数を超えたら処理終了
     max_limit_likes_counter = 500
@@ -23,7 +23,7 @@ def auto_like(driver, file_words, follow_bool):
     #file_alu = "already_likes_url.txt"
 
     #いいね！したいワードをファイルから取得し、そのうち5つを選ぶ
-    words = readfile.readWords( file_words )
+    words = readfile.readWords( "words_1.txt" )
     todays_like_words = []
     while len(todays_like_words) < 5:
         random_word = words[random.randint(0, len(words)-1)]

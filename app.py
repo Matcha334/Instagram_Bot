@@ -10,39 +10,45 @@ import traceback
 # 作成した関数のインポート
 from auto_like import auto_like
 from repost import repost
+from login import login
 
 if __name__ == '__main__':
-    ## このファイルはlogin.pyを1度実行している時のみ実行してください
-    ## 1. 現在使っているプロファイルへのパス （chrome://version/ を開いて「プロフィール パス」から確認）をオプションに設定。
-    ## login.pyを実行したのにログインされていない場合は、Defaultを削除して行ってみてください
-    ## 自分の環境に合ったものだけコメントアウトを解除してください
+    ## 自分の環境を入力してください ##
+    #####################################
+    webdriver_path = ""
+    your_env = "" # mac or windows or linux
+    your_computer_name = ""
+    logged_in = True #ログインしているか否か
+    #######################################
 
-    # (mac)
-    PROFILE_PATH = "/Users/YourComputerName/Library/Application Support/Google/Chrome/Default"
-    # (windows)
-    # PROFILE_PATH = r"C:\Users\YOURCOMPURENAME\AppData\Local\Google\Chrome\User Data\Default"
 
-    # (linux)
-    # PROFILE_PATH = "~/.config/google-chrome"
+    if your_env == "mac":
+        PROFILE_PATH = "/Users/{}/Library/Application Support/Google/Chrome/Default".format(your_computer_name)
+    elif your_env == "windows":
+        PROFILE_PATH = "C:/Users/{}/AppData/Local/Google/Chrome/User Data/Default".format(your_computer_name)
+    else:
+        PROFILE_PATH = "~/.config/google-chrome"
     
-    ## バックグラウンドで実行したい場合は以下の1行のコメントアウトを解除
-    # options.add_argument('--headless')
 
     ## chromeの実行のオプションを追加
     options = Options()
+    ## バックグラウンドで実行したい場合は以下の1行のコメントアウトを解除
+    # options.add_argument('--headless')
     options.add_argument("--user-data-dir=" + PROFILE_PATH)
     options.add_argument("--no-sandbox")
 
     ## chromeを立ち上げる
-    driver = webdriver.Chrome(options=options, executable_path="/usr/local/bin/chromedriver")
+    driver = webdriver.Chrome(options=options, executable_path=webdriver_path)
     
     ## 画面の大きさを最大化する
     driver.maximize_window()
 
+    if not logged_in:
+        login(driver, "YourUsername", "YourPassword")
+
     ## 実行したい関数のコメントアウトを解除してください
-    # auto_like(driver, "words_1.txt", follow_bool=True)
+    auto_like(driver, follow_bool=True) #True or Falseを入力
     repost(driver)
-    # follow(driver)
 
     ## chromeを閉じる
     driver.close()

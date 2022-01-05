@@ -1,21 +1,15 @@
-from math import trunc
-from selenium import webdriver
-from selenium.webdriver.common import by
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-import urllib.parse
 import time
 import datetime
 import sys
 import traceback
 import readfile
 import random
-import requests
-import json
+
+from follow import follow
 
 
-def auto_like(driver, file_words):
+def auto_like(driver, follow_bool):
   
     #１日にいいね！できる最大値。この数を超えたら処理終了
     max_limit_likes_counter = 500
@@ -29,7 +23,7 @@ def auto_like(driver, file_words):
     #file_alu = "already_likes_url.txt"
 
     #いいね！したいワードをファイルから取得し、そのうち5つを選ぶ
-    words = readfile.readWords( file_words )
+    words = readfile.readWords( "words_1.txt" )
     todays_like_words = []
     while len(todays_like_words) < 5:
         random_word = words[random.randint(0, len(words)-1)]
@@ -90,7 +84,8 @@ def auto_like(driver, file_words):
                     likes_cnt += 1
                     print('いいね！ {}'.format(likes_cnt))
                     time.sleep(5)
-                    #follow()
+                    if follow_bool:
+                        follow(driver)
                 else: # '「いいね！」を取り消す'の場合
                     print('  既に「いいね」済みです。')    
                 time.sleep(2)

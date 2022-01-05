@@ -9,6 +9,7 @@ requests = "*"
 pyperclip = "*"
 pyautogui = "*"
 pillow = "*"
+pandas = "*"
 
 [dev-packages]
 

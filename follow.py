@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-import readfile
 import time
 
 def follow(driver):

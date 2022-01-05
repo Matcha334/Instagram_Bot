@@ -1,19 +1,10 @@
 # 必要なライブラリのインポート
 from math import trunc
 from selenium import webdriver
-from selenium.webdriver.common import by
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-import urllib.parse
 import time
-import datetime
-import sys
-import traceback
-import auto_like
-import random
-import requests
-import json
 
 def login(driver, username, password):
     #Instagram ログインURL

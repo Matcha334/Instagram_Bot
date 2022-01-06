@@ -15,15 +15,30 @@ def follow(driver):
         time.sleep(3)
 
         follower = driver.find_elements(By.CLASS_NAME,'g47SY')[1].get_attribute("title")
-        follower= int (follower.repalace(',',''))
+        
+        follower= int (follower.replace(',',''))
         if follower == 0:
             follower = follower + 1
 
         follow = driver.find_elements(By.CLASS_NAME,'g47SY')[2].text
-        follow= int (follow.repalace(',',''))
+        follow= int (follow.replace(',',''))
+        follow_count=0
+        follow_max=3
         print("follower num : ", follower, "follow num: ", follow)
-        if (int(follow)/int(follower)) >= 1:
-            profile_follow_button = driver.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button')
-            profile_follow_button.click()
-            print("フォローしました")
-            time.sleep(3)
+        if(follow_count>follow_max):
+            print("一日のフォロー上限に達しました")
+            off=True
+        #毎日すべて止まる可能性がある、できればこのフォローのみを終わらせて他は引き続き実行し続けておきたい
+       # elif (int(follow)/int(follower)) >= 1:
+        else:
+           profile_follow_button = driver.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button')
+           profile_follow_button.click()
+           print("フォローしました")
+           time.sleep(3)
+           follow_count+=1
+            
+
+            
+        
+
+        

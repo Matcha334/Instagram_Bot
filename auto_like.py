@@ -6,8 +6,6 @@ import traceback
 import readfile
 import random
 
-from follow import follow
-
 
 def auto_like(driver, follow_bool):
   
@@ -84,8 +82,6 @@ def auto_like(driver, follow_bool):
                     likes_cnt += 1
                     print('いいね！ {}'.format(likes_cnt))
                     time.sleep(5)
-                    if follow_bool:
-                        follow(driver)
                 else: # '「いいね！」を取り消す'の場合
                     print('  既に「いいね」済みです。')    
                 time.sleep(2)
@@ -120,3 +116,4 @@ def auto_like(driver, follow_bool):
                 break
 
     print("本日のいいね！回数 {}".format(likes_cnt))
+

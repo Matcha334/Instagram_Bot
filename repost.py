@@ -56,7 +56,7 @@ def repost(driver):
         tb.click()
         edit = window.Edit4
         edit.set_focus()
-        edit.set_text(r"C:\Users\yamag\OneDrive\デスクトップ\MyProgramming\instagram_bot\origianl_instagram_bot\download.jpg")
+        edit.set_text(r"C:\Users\Administrator\Desktop\original_instagram_bot-master\download.jpg")
 
     # 開くボタンを押す（Alt+O）
     pywinauto.keyboard.send_keys("%O")
@@ -68,26 +68,14 @@ def repost(driver):
     #『次へ』をクリック
     next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
     next_button1.click()
-    time.sleep(5)
+    time.sleep(8)
     print("1回目の次へボタンを押しました")
     next_button2 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
     next_button2.click()
-    time.sleep(5)
+    time.sleep(8)
     print("2回目の次へボタンを押しました")
-
-    time.sleep(3)
     driver.implicitly_wait(10)
     print("ファイルをアップロードしました")
-    
-    #『次へ』をクリック
-    next_button1 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
-    next_button1.click()
-    time.sleep(5)
-    print("1回目の次へボタンを押しました")
-    next_button2 = driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div/div[1]/div/div/div[2]/div/button')
-    next_button2.click()
-    time.sleep(5)
-    print("2回目の次へボタンを押しました")
 
     #キャプションを作成(元の投稿者をメンションし、ハッシュタグをつける)
     caption = "photo by @{}\n\n----------------\n#tokyo#photographer#japan#写真好きな人と繋がりたい".format(credit)
